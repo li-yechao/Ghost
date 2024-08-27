@@ -119,6 +119,7 @@ module.exports = {
     },
     // NOTE: this is the staff table
     users: {
+        did: {type: 'string', maxlength: 128, nullable: true, unique: true},
         id: {type: 'string', maxlength: 24, nullable: false, primary: true},
         name: {type: 'string', maxlength: 191, nullable: false},
         slug: {type: 'string', maxlength: 191, nullable: false, unique: true},
