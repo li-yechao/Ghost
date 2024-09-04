@@ -1,4 +1,5 @@
 import React from 'react';
+import {withQuery} from 'ufo'
 import Frame from './Frame';
 import MemberGravatar from './common/MemberGravatar';
 import AppContext from '../AppContext';
@@ -164,6 +165,9 @@ class TriggerButtonContent extends React.Component {
 
     onToggle() {
         const {showPopup, member, site} = this.context;
+
+        window.location.href = member ? '/.well-known/service/user' : withQuery('/.well-known/service/login', {redirect: window.location.href})
+        return
 
         if (showPopup) {
             this.context.onAction('closePopup');

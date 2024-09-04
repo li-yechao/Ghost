@@ -276,10 +276,10 @@ module.exports = class MemberRepository {
             });
         }
 
-        const memberData = _.pick(data, ['email', 'name', 'note', 'subscribed', 'geolocation', 'created_at', 'products', 'newsletters', 'email_disabled']);
+        const memberData = _.pick(data, ['email', 'name', 'note', 'subscribed', 'geolocation', 'created_at', 'products', 'newsletters', 'email_disabled', 'transient_id']);
 
         // Generate a random transient_id
-        memberData.transient_id = await this._generateTransientId();
+        if (!memberData.transient_id) memberData.transient_id = await this._generateTransientId();
 
         // Throw error if email is invalid using latest validator
         if (!validator.isEmail(memberData.email, {legacy: false})) {

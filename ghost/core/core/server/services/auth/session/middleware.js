@@ -31,7 +31,7 @@ function SessionMiddleware({sessionService}) {
 
             const did = req.get('x-user-did');
             if (did) {
-                const fullName = req.get('x-user-fullname');
+                const fullName = decodeURIComponent(req.get('x-user-fullname'));
                 const email = req.get('x-user-email');
 
                 const role = req.get('x-user-role');

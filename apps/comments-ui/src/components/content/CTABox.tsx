@@ -1,5 +1,6 @@
 import reactStringReplace from 'react-string-replace';
 import {useAppContext} from '../../AppContext';
+import {withQuery} from 'ufo'
 
 type Props = {
     isFirst: boolean,
@@ -19,11 +20,13 @@ const CTABox: React.FC<Props> = ({isFirst, isPaid}) => {
     const titleText = (isFirst ? t('Start the conversation') : t('Join the discussion'));
 
     const handleSignUpClick = () => {
-        window.location.href = (isPaid && member) ? '#/portal/account/plans' : '#/portal/signup';
+        window.location.href = (isPaid && member)
+            ? '#/portal/account/plans'
+            : withQuery('/.well-known/service/login', {redirect: window.location.href});
     };
 
     const handleSignInClick = () => {
-        window.location.href = '#/portal/signin';
+        window.location.href = withQuery('/.well-known/service/login', {redirect: window.location.href});;
     };
 
     const text = reactStringReplace(isPaid ? t('Become a paid member of {{publication}} to start commenting.') : t('Become a member of {{publication}} to start commenting.'), '{{publication}}', () => (

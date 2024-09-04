@@ -4,6 +4,8 @@ const {IncorrectUsageError} = require('@tryghost/errors');
 const setContext = require('./context');
 const templates = require('./templates');
 const tpl = require('@tryghost/tpl');
+const {joinURL, withQuery} = require('ufo')
+const config = require('../../../shared/config');
 const messages = {
     couldNotReadFile: 'Could not read file {file}'
 };
@@ -15,6 +17,8 @@ const messages = {
  * @param {Object} data
  */
 module.exports = function renderer(req, res, data) {
+    data = {...data, loginUrl: `${withQuery('/.well-known/service/login', {redirect: joinURL(config.getSiteUrl(), res.locals.relativeUrl)})}`}
+
     // Set response context
     setContext(req, res, data);
 

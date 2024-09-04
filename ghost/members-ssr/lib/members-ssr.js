@@ -291,8 +291,29 @@ class MembersSSR {
      * @returns {Promise<Member>}
      */
     async getMemberDataFromSession(req, res) {
-        const transientId = this._getSessionCookies(req, res);
-        const member = await this._getMemberIdentityDataFromTransientId(transientId);
+        // const transientId = this._getSessionCookies(req, res);
+        // const member = await this._getMemberIdentityDataFromTransientId(transientId);
+
+        const did = req.get('x-user-did');
+
+        if (did) {
+            const fullName = decodeURIComponent(req.get('x-user-fullname'));
+            const email = req.get('x-user-email');
+
+            const api = await this._getMembersApi()
+
+            const member = await api.members.get({transient_id: did})
+            if (!member) {
+                await api.members.create({
+                    transient_id: did,
+                    email,
+                    name: fullName
+                })
+            }
+        }
+
+
+        const member = await this._getMemberIdentityDataFromTransientId(did);
         return member;
     }
 

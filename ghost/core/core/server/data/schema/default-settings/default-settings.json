@@ -63,7 +63,7 @@
     },
     "site": {
         "title": {
-            "defaultValue": "Ghost",
+            "defaultValue": "dGhost",
             "validations": {
                 "isLength": {
                     "max": 150
@@ -83,7 +83,7 @@
             "type": "string"
         },
         "logo": {
-            "defaultValue": "",
+            "defaultValue": "/.well-known/service/blocklet/logo?imageFilter=convert&f=png&h=80",
             "type": "string"
         },
         "cover_image": {
@@ -134,11 +134,11 @@
             "type": "string"
         },
         "navigation": {
-            "defaultValue": "[{\"label\":\"Home\",\"url\":\"/\"},{\"label\":\"About\",\"url\":\"/about/\"}]",
+            "defaultValue": "[{\"label\":\"Home\",\"url\":\"/\"}]",
             "type": "array"
         },
         "secondary_navigation": {
-            "defaultValue": "[{\"label\":\"Sign up\",\"url\":\"#/portal/\"}]",
+            "defaultValue": "[]",
             "type": "array"
         },
         "meta_title": {
